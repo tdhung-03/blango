@@ -20,6 +20,7 @@ mimetypes.add_type("application/javascript", ".js", True)
 
 
 class Dev(Configuration):
+    AUTH_USER_MODEL = "blango_auth.User"
     DEBUG_TOOLBAR_CONFIG = {
         "INTERCEPT_REDIRECTS": False,
     }
@@ -50,6 +51,7 @@ class Dev(Configuration):
         "crispy_forms",
         "crispy_bootstrap5",
         "debug_toolbar",
+        "blango_auth",
     ]
 
     MIDDLEWARE = [
