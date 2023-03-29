@@ -14,9 +14,15 @@ from pathlib import Path
 from configurations import Configuration
 from configurations import values
 import dj_database_url
+import mimetypes
+
+mimetypes.add_type("application/javascript", ".js", True)
 
 
 class Dev(Configuration):
+    DEBUG_TOOLBAR_CONFIG = {
+        "INTERCEPT_REDIRECTS": False,
+    }
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
     BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,9 +49,11 @@ class Dev(Configuration):
         "blog.apps.BlogConfig",
         "crispy_forms",
         "crispy_bootstrap5",
+        "debug_toolbar",
     ]
 
     MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django.middleware.security.SecurityMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
         "django.middleware.common.CommonMiddleware",
@@ -176,6 +184,8 @@ class Dev(Configuration):
         'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
         'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     ]
+
+    INTERNAL_IPS = ["127.0.0.1"]
 
 
 class Prod(Dev):
