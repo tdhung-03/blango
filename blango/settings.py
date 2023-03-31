@@ -57,7 +57,15 @@ class Dev(Configuration):
         "allauth.socialaccount",
         "allauth.socialaccount.providers.google",
         "rest_framework",
+        "rest_framework.authtoken",
     ]
+    REST_FRAMEWORK = {
+        "DEFAULT_AUTHENTICATION_CLASSES": [
+            "rest_framework.authentication.BasicAuthentication",
+            "rest_framework.authentication.SessionAuthentication",
+            "rest_framework.authentication.TokenAuthentication",
+        ]
+    }
     SITE_ID = 1
     ACCOUNT_USER_MODEL_USERNAME_FIELD = None
     ACCOUNT_EMAIL_REQUIRED = True
